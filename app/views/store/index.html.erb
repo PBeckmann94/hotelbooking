@@ -1,4 +1,30 @@
-<div>
-  <h1 class="font-bold text-4xl">Store#index</h1>
-  <p>Find me in app/views/store/index.html.erb</p>
+
+<div class="w-full flex flex-col">
+<%= form_tag(search_hotels_path, method: :get) do %>
+  <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+    <div class="flex flex-col items-start">
+      <%= label_tag :city, "City" %>
+      <%= text_field_tag :city, params[:city], class: "border rounded-lg px-3 py-2 w-64" %>
+    </div>
+    <div class="flex flex-col items-start">
+      <%= label_tag :arrival_date, "Arrival Date" %>
+      <%= datetime_local_field_tag :arrival_date, params[:arrival_date], class: "border rounded-lg px-3 py-2 w-64" %>
+    </div>
+    <div class="flex flex-col items-start">
+      <%= label_tag :departure_date, "Departure Date" %>
+      <%= datetime_local_field_tag :departure_date, params[:departure_date], class: "border rounded-lg px-3 py-2 w-64" %>
+    </div>
+    <div class="flex flex-col items-start">
+      <%= label_tag :number_of_rooms, "Number of Rooms" %>
+      <%= number_field_tag :number_of_rooms, params[:number_of_rooms], class: "border rounded-lg px-3 py-2 w-64" %>
+    </div>
+    <div class="flex flex-col items-start">
+      <%= label_tag :price, "Max price" %>
+      <%= text_field_tag :price, params[:price], class: "border rounded-lg px-3 py-2 w-64" %>
+    </div>
+  </div>
+  <div class="flex justify-center my-4">
+    <%= submit_tag "Search", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" %>
+  </div>
+<% end %>
 </div>

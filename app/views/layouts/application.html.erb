@@ -12,8 +12,23 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
+
+<header class="bg-gray-100">
+<%= image_tag 'hotelbooking.png', class: "w-40 h-30", alt: 'Hotel Booking' %>
+<h1><%= @page_title %></h1>
+
+</header>
+
+<section class="flex h-screen w-full flex-row">
+  <nav class="bg-gray-200 p-6 w-40">
+    <ul class="leading-8">
+      <li><a class="hover:text-gray-600" href="/">Search</a></li>
+      <li><a class="hover:text-gray-600" href="/hotels">Browse</a></li>
+    </ul>
+  </nav>
+  <main class="mx-auto mt-4 px-5 flex">
+    <%= yield %>
+  </main>
+</section>
+</body>
 </html>

@@ -1,10 +1,12 @@
 class BookingsController < ApplicationController
-  belongs_to :hotels
+  before_action :set_hotel, only: [:new, :create]
   before_action :set_booking, only: %i[ show edit update destroy ]
+
 
   # GET /bookings or /bookings.json
   def index
-    @bookings = Booking.all
+    @hotel = Hotel.find(params[:hotel_id])
+    @bookings = @hotel.bookings.all
   end
 
   # GET /bookings/1 or /bookings/1.json
@@ -13,8 +15,11 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+    @hotel = Hotel.find(params[:hotel_id])
+    @booking = @hotel.bookings.build
   end
+  
+  
 
   # GET /bookings/1/edit
   def edit
@@ -22,11 +27,12 @@ class BookingsController < ApplicationController
 
   # POST /bookings or /bookings.json
   def create
-    @booking = Booking.new(booking_params)
-
+    @hotel = Hotel.find(params[:hotel_id])
+    @booking = @hotel.bookings.new(booking_params)
+  
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to booking_url(@booking), notice: "Booking was successfully created." }
+        format.html { redirect_to hotel_bookings_path(@hotel, @booking), notice:, notice: "Booking was successfully created." }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,6 +65,13 @@ class BookingsController < ApplicationController
   end
 
   private
+
+
+  def set_hotel
+    @hotel = Hotel.find(params[:hotel_id])
+  end
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
@@ -66,6 +79,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:first_name, :last_name, :phone, :email, :hotel_id, :city, :arrival_date, :departure_date, :number_of_rooms, :price)
+      params.require(:booking).permit(:first_name, :last_name, :phone, :email, :hotel_id, :arrival_date, :departure_date, :number_of_rooms)
     end
 end

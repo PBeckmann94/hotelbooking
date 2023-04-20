@@ -14,6 +14,12 @@ module.exports = {
       },
     },
   },
+
+  zIndex: {
+    "10k": "10000",
+    "10k-1": "9999"
+  },
+  
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),

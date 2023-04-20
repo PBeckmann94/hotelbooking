@@ -1,2 +1,3 @@
 class Hotel < ApplicationRecord
-end
+    has_many :bookings
+  end
